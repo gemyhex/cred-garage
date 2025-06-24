@@ -1,55 +1,43 @@
-import { BenefitCard } from "./BenefitCard";
-import { motion } from 'framer-motion';
-import { useState } from "react";
-import CongratulationModal from "./CongratulationModal";
+import { useState } from 'react'
+import { BenefitCard } from './BenefitCard'
+import CongratulationModal from './CongratulationModal'
 
-export const BenefitList = ({ benefits }) => {
-    const [claimedBenefit, setClaimedBenefit] = useState(null);
+type BenefitListProps = {
+  benefits: any[]
+  onClaim: (id: string) => void
+}
 
-    const cardVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: (i: number) => ({
-            opacity: 1,
-            y: 0,
-            transition: { delay: i * 0.1, duration: 0.4, ease: 'easeOut' }
-        })
-    };
+export const BenefitList = ({ benefits, onClaim }: BenefitListProps) => {
+  const [selected, setSelected] = useState<any | null>(null)
 
-    const handleClaim = (benefit) => {
-        setClaimedBenefit(benefit);
-    };
+  const handleClaim = (benefit: any) => {
+    if (benefit.claimed) return
+    setSelected(benefit)
+  }
 
-    const closeModal = () => {
-        setClaimedBenefit(null);
-    };
+  return (
+    <>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {benefits.map((benefit) => (
+          <BenefitCard
+            key={benefit.id}
+            benefit={benefit}
+            onClaim={handleClaim}
+            onMarkClaimed={onClaim}
+          />
+        ))}
+      </div>
 
-    return (
-        <>
-            <motion.section
-                className="mt-4 grid grid-cols-1 sm:grid-cols-4 gap-6"
-                initial="hidden"
-                animate="visible"
-            >
-                {benefits.map((benefit, idx) => (
-                    <motion.div
-                        key={idx}
-                        custom={idx}
-                        variants={cardVariants}
-                    >
-                        <BenefitCard
-                            benefit={benefit}
-                            onClaim={() => handleClaim(benefit)}
-                        />
-                    </motion.div>
-                ))}
-            </motion.section>
-
-            {claimedBenefit && (
-                <CongratulationModal
-                    benefit={claimedBenefit}
-                    onClose={closeModal}
-                />
-            )}
-        </>
-    );
-};
+      {/* Modal */}
+      {selected && (
+        <CongratulationModal
+          benefit={selected}
+          onClose={() => {
+            setSelected(null)
+            onClaim(selected.id)
+          }}
+        />
+      )}
+    </>
+  )
+}

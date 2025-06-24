@@ -15,7 +15,7 @@ export default function CongratulationModal({ benefit, onClose }) {
                 <Confetti width={window.innerWidth} height={window.innerHeight} />
 
                 <motion.div
-                    className="bg-white/10 hover:bg-gradient-to-tr hover:from-[#28CC95]/60 hover:to-[#007CF0]/60 backdrop-blur-lg border border-white/10 p-10 rounded-2xl shadow-2xl w-full max-w-xl text-center text-white transition-all duration-75"
+                    className="bg-gradient-to-tr from-[#28CC95]/60 hover:to-[#007CF0]/60 backdrop-blur-lg border border-white/10 p-10 rounded-2xl shadow-2xl w-full max-w-xl text-center text-white transition-all duration-75"
                     initial={{ scale: 0, opacity: 0, y: -100 }}
                     animate={{ scale: 1, opacity: 1, y: 0 }}
                     exit={{ scale: 0, opacity: 0, y: 100 }}

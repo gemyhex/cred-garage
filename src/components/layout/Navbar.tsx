@@ -39,7 +39,6 @@ export default function Navbar({ user }: { user?: any }) {
             }`}
         >
             <div className="mx-auto flex h-16 items-center justify-between px-4">
-                {/* Animated SVG Logo */}
                 <motion.svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="36"
@@ -77,7 +76,6 @@ export default function Navbar({ user }: { user?: any }) {
                     </motion.g>
                 </motion.svg>
 
-                {/* Theme Toggle + Avatar */}
                 <div className="flex items-center gap-4">
                     <ThemeSwitcher />
                     {scrolled && user && <UserAvatarMenu user={user} />}
