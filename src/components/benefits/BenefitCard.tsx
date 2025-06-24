@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import clsx from 'clsx'
-import { Benefit } from '@/types/benefit' // adjust path as needed
+import { Benefit } from '@/types/benefit'
 
 export const BenefitCard = ({
   benefit,

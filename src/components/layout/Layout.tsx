@@ -11,7 +11,7 @@ type DashboardLayoutProps = {
   children: ReactNode
   layoutType?: 'container' | 'full'
   withSidebar?: boolean
-  user?: User
+  user?: User | null
 }
 
 export default function DashboardLayout({
@@ -24,11 +24,11 @@ export default function DashboardLayout({
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
-      <Navbar user={user} />
+      <Navbar user={user ?? undefined} />
 
       {/* Fixed Sidebar */}
       {withSidebar && (
-        <UserProfileSidebar user={user} onWidthChange={setSidebarWidth} />
+        <UserProfileSidebar user={user ?? undefined} onWidthChange={setSidebarWidth} />
       )}
 
       <main

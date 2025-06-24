@@ -97,7 +97,6 @@ export default function RewardProgress({
       },
       animation: {
         duration: 1200,
-        easing: "easeInOutCubic",
       },
     }),
     []

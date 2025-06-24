@@ -10,38 +10,39 @@ export function UserProfileInfo({ user }: { user: User }) {
   const [displayLevel, setDisplayLevel] = useState(0);
   const controls = useAnimation();
 
-  useEffect(() => {
-    let mounted = true;
-    let step = 0;
-    const duration = 2000;
-    const totalSteps = duration / 16;
+ useEffect(() => {
+  let mounted = true;
+  let step = 0;
+  const duration = 2000;
+  const totalSteps = duration / 16;
 
-    const xpTarget = user?.xp;
-    const levelTarget = user?.level;
-    const progress = Math.min((user?.xp / user?.nextLevelXP) * 100, 100);
+  const xpTarget = user?.xp ?? 0;
+  const levelTarget = user?.level ?? 0;
+  const progress = Math.min((user?.xp ?? 0) / (user?.nextLevelXP ?? 1) * 100, 100);
 
-    function animate() {
-      step++;
-      const percent = Math.min(step / totalSteps, 1);
+  function animate() {
+    step++;
+    const percent = Math.min(step / totalSteps, 1);
 
-      if (mounted) {
-        setDisplayXP(Math.floor(percent * xpTarget));
-        setDisplayLevel(Math.floor(percent * levelTarget));
-        controls.start({
-          strokeDashoffset: 282.74 * (1 - (percent * progress) / 100),
-          transition: { duration: 0.1 },
-        });
-      }
-
-      if (percent < 1) requestAnimationFrame(animate);
+    if (mounted) {
+      setDisplayXP(Math.floor(percent * xpTarget));
+      setDisplayLevel(Math.floor(percent * levelTarget));
+      controls.start({
+        strokeDashoffset: 282.74 * (1 - (percent * progress) / 100),
+        transition: { duration: 0.1 },
+      });
     }
 
-    requestAnimationFrame(animate);
+    if (percent < 1) requestAnimationFrame(animate);
+  }
 
-    return () => {
-      mounted = false;
-    };
-  }, [user]);
+  requestAnimationFrame(animate);
+
+  return () => {
+    mounted = false;
+  };
+}, [user, controls]);
+
 
   return (
     <div className="text-center space-y-3">

@@ -5,11 +5,13 @@ import RewardProgress from "@/components/rewards/RewardProgress";
 import { SkeletonLoader } from "@/components/ui/SkeletonLoader";
 import Layout from "@/components/layout/Layout";
 import { fakeFetch } from "@/lib/fakeFetch";
+import { User } from "@/types/users";
+import { Benefit } from "@/types/benefit";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
-  const [benefits, setBenefits] = useState([]);
+  const [user, setUser] = useState<User | null>(null);
+  const [benefits, setBenefits] = useState<Benefit[]>([]);
 
   useEffect(() => {
     fakeFetch(
@@ -329,7 +331,7 @@ export default function Home() {
         <meta name="description" content="CRED Garage Rewards Dashboard" />
       </Head>
 
-      <Layout user={user} withSidebar layoutType="container">
+      <Layout user={user ?? undefined} withSidebar layoutType="container">
         {loading ? (
           <SkeletonLoader />
         ) : (
@@ -339,7 +341,9 @@ export default function Home() {
               <h2 className="text-xl font-semibold tracking-tight">
                 🎯 Your Reward Progress
               </h2>
-              <RewardProgress user={user} chartData={benefitStatusData} />
+              {user && (
+                <RewardProgress user={user} chartData={benefitStatusData} />
+              )}
             </section>
 
             {/* Section: Available Benefits */}

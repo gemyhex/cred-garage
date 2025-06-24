@@ -13,7 +13,6 @@ const pathVariants = {
         opacity: [0.5, 1, 0.5],
         transition: {
             duration: 4,
-            ease: 'easeInOut',
             repeat: Infinity,
         },
     },

@@ -2,8 +2,15 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import Confetti from 'react-confetti';
+import { Benefit } from '@/types/benefit'
 
-export default function CongratulationModal({ benefit, onClose }) {
+interface CongratulationModalProps {
+  benefit: Benefit;
+  onClose: () => void;
+}
+
+
+export default function CongratulationModal({ benefit, onClose }: CongratulationModalProps) {
     return (
         <AnimatePresence>
             <motion.div
