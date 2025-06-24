@@ -1,40 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🏆 CRED Garage-Inspired Rewards Dashboard
 
-## Getting Started
+A sleek, modern rewards dashboard built with Next.js, TailwindCSS, Framer Motion, and Chart.js. This app tracks user XP, displays progress, and allows users to claim dynamic benefits — all with elegant animations and a glass-inspired UI.
 
-First, run the development server:
+---
 
+## 🔧 Tech Stack
+
+- [Next.js] – React framework
+- [TailwindCSS] – Utility-first CSS
+- [Framer Motion] – Animation library
+- [GSAP] – Animation library
+- [Chart.js] + [react-chartjs-2] – Visualizing reward points
+- [ShadCN] – UI components (optional use)
+- [Zustand] – Lightweight state management
+- TypeScript – Static typing
+
+---
+
+## 🚀 Setup Instructions
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/gemyhex/cred-garage.git
+cd cred-garage
+```
+2. Install dependencies
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Run development server
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+4. Build for production
+```bash
+npm run build
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🌟 Features
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+🎯 XP & Level Tracker (animated radial chart)
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+🎁 Animated Benefit Cards with claim action
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+✨ Glassmorphism UI (blurred backgrounds)
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+🎨 Light/Dark mode with animated SVG branding
 
-## Learn More
+💡 Responsive layout with collapsible sidebar
 
-To learn more about Next.js, take a look at the following resources:
+🎬 Smooth animations using Framer Motion
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+📈 Reward Progress section using Chart.js
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+📱 Fully responsive design
