@@ -1,49 +1,49 @@
 'use client'
 
 import { ReactNode, useState } from 'react'
-import Navbar from './Navbar'
-import Preloader from '../ui/Preloader'
 import clsx from 'clsx'
+
+import Navbar from './Navbar'
 import UserProfileSidebar from './UserProfileSidebar'
 import { User } from '@/types/users'
 
 type DashboardLayoutProps = {
-    children: ReactNode
-    layoutType?: 'container' | 'full'
-    withSidebar?: boolean
-    user?: User
+  children: ReactNode
+  layoutType?: 'container' | 'full'
+  withSidebar?: boolean
+  user?: User
 }
 
 export default function DashboardLayout({
-                                            children,
-                                            layoutType = 'container',
-                                            withSidebar = true,
-                                            user,
-                                        }: DashboardLayoutProps) {
-    const [loadingDone, setLoadingDone] = useState(false)
-    return (
-        <>
-            {!loadingDone && <Preloader onFinish={() => setLoadingDone(true)} />}
+  children,
+  layoutType = 'container',
+  withSidebar = true,
+  user,
+}: DashboardLayoutProps) {
+  const [sidebarWidth, setSidebarWidth] = useState(250)
 
-            {loadingDone && (
-                <div className="relative min-h-screen flex flex-col bg-background text-foreground">
-                    <Navbar user={user} />
+  return (
+    <div className="min-h-screen bg-background text-foreground overflow-hidden">
+      <Navbar user={user} />
 
-                    <div className="flex flex-1 overflow-hidden">
-                        {withSidebar &&  <UserProfileSidebar user={user} />}
+      {/* Fixed Sidebar */}
+      {withSidebar && (
+        <UserProfileSidebar user={user} onWidthChange={setSidebarWidth} />
+      )}
 
-                        <main
-                            className={clsx(
-                                'flex-1 py-6 overflow-y-auto transition-all',
-                                layoutType === 'container' && 'container px-4 mx-auto',
-                                layoutType === 'full' && 'w-full px-6'
-                            )}
-                        >
-                            {children}
-                        </main>
-                    </div>
-                </div>
-            )}
-        </>
-    )
+      <main
+        className={clsx(
+          'pt-24 transition-all overflow-x-hidden',
+          layoutType === 'container' && 'container px-8 py-6 mx-auto',
+          layoutType === 'full' && 'w-full px-6 py-6'
+        )}
+        style={{
+          marginLeft: withSidebar ? `${sidebarWidth}px` : undefined,
+          width: withSidebar ? `calc(100vw - ${sidebarWidth}px)` : '100vw',
+        }}
+      >
+        {children}
+      </main>
+    </div>
+  )
 }

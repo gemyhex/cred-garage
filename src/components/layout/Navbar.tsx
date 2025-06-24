@@ -33,7 +33,7 @@ export default function Navbar({ user }: { user?: User }) {
 
     return (
         <header
-            className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+            className={`fixed top-0 z-50 w-full transition-all duration-300 ${
                 scrolled
                     ? 'bg-background/40 backdrop-blur-md border-b border-white/10 shadow-sm'
                     : 'bg-background border-b border-border'

@@ -329,7 +329,7 @@ export default function Home() {
         <meta name="description" content="CRED Garage Rewards Dashboard" />
       </Head>
 
-      <Layout user={user} withSidebar layoutType="full">
+      <Layout user={user} withSidebar layoutType="container">
         {loading ? (
           <SkeletonLoader />
         ) : (
