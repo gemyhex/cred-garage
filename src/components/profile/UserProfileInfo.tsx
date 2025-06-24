@@ -1,45 +1,47 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import { motion, useAnimation } from 'framer-motion'
+import { useEffect, useState } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { User } from "@/types/users";
+import Image from "next/image";
 
-export function UserProfileInfo({ user }: { user: any }) {
-  const [displayXP, setDisplayXP] = useState(0)
-  const [displayLevel, setDisplayLevel] = useState(0)
-  const controls = useAnimation()
+export function UserProfileInfo({ user }: { user: User }) {
+  const [displayXP, setDisplayXP] = useState(0);
+  const [displayLevel, setDisplayLevel] = useState(0);
+  const controls = useAnimation();
 
   useEffect(() => {
-    let mounted = true
-    let step = 0
-    const duration = 2000
-    const totalSteps = duration / 16
+    let mounted = true;
+    let step = 0;
+    const duration = 2000;
+    const totalSteps = duration / 16;
 
-    const xpTarget = user?.xp
-    const levelTarget = user?.level
-    const progress = Math.min((user?.xp / user?.nextLevelXP) * 100, 100)
+    const xpTarget = user?.xp;
+    const levelTarget = user?.level;
+    const progress = Math.min((user?.xp / user?.nextLevelXP) * 100, 100);
 
     function animate() {
-      step++
-      const percent = Math.min(step / totalSteps, 1)
+      step++;
+      const percent = Math.min(step / totalSteps, 1);
 
       if (mounted) {
-        setDisplayXP(Math.floor(percent * xpTarget))
-        setDisplayLevel(Math.floor(percent * levelTarget))
+        setDisplayXP(Math.floor(percent * xpTarget));
+        setDisplayLevel(Math.floor(percent * levelTarget));
         controls.start({
           strokeDashoffset: 282.74 * (1 - (percent * progress) / 100),
           transition: { duration: 0.1 },
-        })
+        });
       }
 
-      if (percent < 1) requestAnimationFrame(animate)
+      if (percent < 1) requestAnimationFrame(animate);
     }
 
-    requestAnimationFrame(animate)
+    requestAnimationFrame(animate);
 
     return () => {
-      mounted = false
-    }
-  }, [user])
+      mounted = false;
+    };
+  }, [user]);
 
   return (
     <div className="text-center space-y-3">
@@ -73,10 +75,12 @@ export function UserProfileInfo({ user }: { user: any }) {
         </svg>
 
         {/* Avatar */}
-        <img
-          src={user?.avatar}
-          alt={user?.name}
-          className="w-16 h-16 rounded-full object-cover z-10 transition duration-300 dark:brightness-0 dark:invert"
+        <Image
+          src={user.avatar}
+          alt={user.name}
+          width={32}
+          height={32}
+          className="rounded-full object-cover z-10 transition duration-300 dark:brightness-0 dark:invert"
         />
       </div>
 
@@ -87,26 +91,29 @@ export function UserProfileInfo({ user }: { user: any }) {
       {/* Level & XP */}
       <div className="text-sm space-y-1">
         <p>
-          Level: <span className="font-medium text-primary">{displayLevel}</span>
+          Level:{" "}
+          <span className="font-medium text-primary">{displayLevel}</span>
         </p>
         <p>
-          XP: <span className="font-medium text-primary">{displayXP}</span> /{' '}
+          XP: <span className="font-medium text-primary">{displayXP}</span> /{" "}
           <span className="text-muted-foreground">{user?.nextLevelXP}</span>
         </p>
         <p className="text-xs text-muted-foreground italic">
-          Progress to next level: {Math.round((user?.xp / user?.nextLevelXP) * 100)}%
+          Progress to next level:{" "}
+          {Math.round((user?.xp / user?.nextLevelXP) * 100)}%
         </p>
       </div>
 
       {/* Membership & Join Date */}
       <div className="text-sm pt-3 space-y-1">
         <p>
-          Membership: <span className="font-semibold text-green-600 dark:text-green-400">{user?.membership}</span>
+          Membership:{" "}
+          <span className="font-semibold text-green-600 dark:text-green-400">
+            {user?.membership}
+          </span>
         </p>
-        <p className="text-muted-foreground">
-          Joined: {user?.joinedAt}
-        </p>
+        <p className="text-muted-foreground">Joined: {user?.joinedAt}</p>
       </div>
     </div>
-  )
+  );
 }

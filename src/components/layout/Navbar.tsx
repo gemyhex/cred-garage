@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ThemeSwitcher } from '@/components/layout/ThemeSwitcher'
 import { UserAvatarMenu } from '@/components/layout/UserAvatarMenu'
+import { User } from '@/types/users'
 
 const pathVariants = {
     initial: { pathLength: 0, opacity: 0.5 },
@@ -18,7 +19,7 @@ const pathVariants = {
     },
 }
 
-export default function Navbar({ user }: { user?: any }) {
+export default function Navbar({ user }: { user?: User }) {
     const [scrolled, setScrolled] = useState(false)
 
     useEffect(() => {

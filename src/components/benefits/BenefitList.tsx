@@ -1,16 +1,17 @@
 import { useState } from 'react'
 import { BenefitCard } from './BenefitCard'
 import CongratulationModal from './CongratulationModal'
+import type { Benefit } from '@/types/benefit'
 
 type BenefitListProps = {
-  benefits: any[]
+  benefits: Benefit[]
   onClaim: (id: string) => void
 }
 
 export const BenefitList = ({ benefits, onClaim }: BenefitListProps) => {
-  const [selected, setSelected] = useState<any | null>(null)
+  const [selected, setSelected] = useState<Benefit | null>(null)
 
-  const handleClaim = (benefit: any) => {
+  const handleClaim = (benefit: Benefit) => {
     if (benefit.claimed) return
     setSelected(benefit)
   }
@@ -28,7 +29,6 @@ export const BenefitList = ({ benefits, onClaim }: BenefitListProps) => {
         ))}
       </div>
 
-      {/* Modal */}
       {selected && (
         <CongratulationModal
           benefit={selected}

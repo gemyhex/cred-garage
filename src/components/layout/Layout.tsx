@@ -1,16 +1,17 @@
 'use client'
 
-import { ReactNode, useState, useEffect } from 'react'
+import { ReactNode, useState } from 'react'
 import Navbar from './Navbar'
 import Preloader from '../ui/Preloader'
 import clsx from 'clsx'
 import UserProfileSidebar from './UserProfileSidebar'
+import { User } from '@/types/users'
 
 type DashboardLayoutProps = {
     children: ReactNode
     layoutType?: 'container' | 'full'
     withSidebar?: boolean
-    user?: any
+    user?: User
 }
 
 export default function DashboardLayout({

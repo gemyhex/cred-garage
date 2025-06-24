@@ -2,14 +2,15 @@
 
 import { useEffect, useState } from 'react'
 import clsx from 'clsx'
+import { Benefit } from '@/types/benefit' // adjust path as needed
 
 export const BenefitCard = ({
   benefit,
   onClaim,
   onMarkClaimed,
 }: {
-  benefit: any
-  onClaim?: (benefit: any) => void
+  benefit: Benefit
+  onClaim?: (benefit: Benefit) => void
   onMarkClaimed: (id: string) => void
 }) => {
   const [timeLeft, setTimeLeft] = useState<string | null>(null)
@@ -18,7 +19,7 @@ export const BenefitCard = ({
     if (!benefit.expiresAt) return
 
     const interval = setInterval(() => {
-      const diff = new Date(benefit.expiresAt).getTime() - Date.now()
+      const diff = new Date(benefit.expiresAt!).getTime() - Date.now()
 
       if (diff <= 0) {
         setTimeLeft('Expired')
@@ -51,7 +52,6 @@ export const BenefitCard = ({
       )}
       onClick={handleClick}
     >
-      {/* One badge in the same position */}
       <div className="absolute top-3 right-3 z-10">
         {benefit.claimed ? (
           <span className="bg-blue-600/90 text-xs px-2 py-1 rounded-full text-white font-medium shadow">
@@ -64,7 +64,6 @@ export const BenefitCard = ({
         ) : null}
       </div>
 
-      {/* Main Content */}
       <div className="flex-1">
         <div className="text-4xl mb-2">{benefit.icon}</div>
 
