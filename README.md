@@ -4,6 +4,12 @@ A sleek, modern rewards dashboard built with Next.js, TailwindCSS, Framer Motion
 
 ---
 
+## 🚀 Live Demo
+
+Check out the live version here: [Live Site](https://cred-garage-task.vercel.app)
+
+---
+
 ## 🔧 Tech Stack
 
 - [Next.js] – React framework
